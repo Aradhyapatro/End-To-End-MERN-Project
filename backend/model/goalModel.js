@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const goalSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      require: true,
+      ref: "User",
+    },
     text: {
       type: String,
       required: [true, "Please Enter a Goal"],

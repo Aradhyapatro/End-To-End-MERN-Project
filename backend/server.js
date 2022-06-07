@@ -1,7 +1,7 @@
 // imports
 const express = require("express");
 const dotenv = require("dotenv").config();
-const route = require("./routes/routes");
+const route = require("./routes/goalRoutes");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const { db } = require("./config/db");
 // constants
@@ -17,6 +17,7 @@ db();
 
 // routes
 app.use("/api/goals", route);
+app.use("/api/users", require("./routes/usersRoute"));
 
 // errorhandler
 app.use(errorHandler);

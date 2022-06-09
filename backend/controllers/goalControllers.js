@@ -37,14 +37,13 @@ const putGoals = asyncHandler(async (req, res) => {
   }
 
   // check if the user exists
-  const user = await Users.findById(req.user.id);
-  if (!user) {
+  if (!req.user) {
     res.status(404);
     throw new Error("User not found");
   }
 
   // check if the user matches with the users's goal
-  if (goal.user.toString() !== user.id) {
+  if (goal.user.toString() !== req.user.id) {
     res.status(404);
     throw new Error(
       "Goal User creater dose'nt match with the person trying to update"
@@ -70,13 +69,13 @@ const deleteGoals = asyncHandler(async (req, res) => {
 
     // check if the user exists
     const user = await Users.findById(req.user.id);
-    if (!user) {
+    if (!req.user) {
       res.status(404);
       throw new Error("User not found");
     }
 
     // check if the user matches with the users's goal
-    if (goal.user.toString() !== user.id) {
+    if (goal.user.toString() !== req.user.id) {
       res.status(404);
       throw new Error(
         "Goal User creater dose'nt match with the person trying to delete"

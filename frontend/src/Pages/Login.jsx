@@ -1,12 +1,36 @@
 import { useState, useEffect } from "react";
-import { FaSignInAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login, reset } from "../features/auth/authSlice";
+import Spinner from "../components/Spinner";
 
-const Register = () => {
+const Login = () => {
   const [formdata, setFormdata] = useState({
     email: "",
     password: "",
-    passwordconfirm: "",
   });
+
+  const { email, password } = formdata;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isError, isLoading, message, isSuccess } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (user || isSuccess) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, isLoading, message, user, dispatch, navigate]);
 
   const onChange = (e) => {
     setFormdata((prevState) => ({
@@ -17,7 +41,17 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+    dispatch(login(userData));
   };
+
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
 
   return (
     <div className="container">
@@ -30,7 +64,7 @@ const Register = () => {
       </section>
 
       <section className="form">
-        <form method="post">
+        <form method="post" onSubmit={onSubmit}>
           <div className="form-group">
             <input
               className="form-control"
@@ -65,4 +99,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

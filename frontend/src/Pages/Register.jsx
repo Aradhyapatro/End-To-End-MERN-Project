@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { register, reset } from "../features/auth/authSlice";
+import Spinner from "../components/Spinner";
 
 const Register = () => {
   const [formdata, setFormdata] = useState({
@@ -8,6 +12,27 @@ const Register = () => {
     password: "",
     passwordconfirm: "",
   });
+
+  const { name, email, password, password2 } = formdata;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isLoading, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormdata((prevState) => ({
@@ -18,7 +43,23 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (password !== password2) {
+      console.error("password don't match");
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+
+      dispatch(register(userData));
+    }
   };
+
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
 
   return (
     <div className="container">
@@ -31,7 +72,7 @@ const Register = () => {
       </section>
 
       <section className="form">
-        <form method="post">
+        <form method="post" onSubmit={onSubmit}>
           <div className="form-group">
             <input
               className="form-control"

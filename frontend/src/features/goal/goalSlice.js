@@ -91,6 +91,21 @@ export const goalSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = actions;
+      })
+      .addCase(deleteGoal.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteGoal.fulfilled, (state, actions) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.goals = state.goals.filter(
+          (goal) => goal._id !== actions.payload.id
+        );
+      })
+      .addCase(deleteGoal.rejected, (state, actions) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = actions;
       });
   },
 });

@@ -37,23 +37,14 @@ const DashBoard = () => {
         <GoalForm></GoalForm>
 
         <section className="content">
-          {goals.map((g) => {
-            <>
-              <Goalitem key={g._id} goal={g} />
-              <p>i am here</p>
-            </>;
-          })}
           {goals.length > 0 ? (
             <div className="goals">
-              {goals.map((g) => {
-                <>
-                  <Goalitem key={g._id} goal={g} />
-                  <p>i am here</p>
-                </>;
-              })}
+              {goals.map((goal) => (
+                <Goalitem key={goal._id} goal={goal} />
+              ))}
             </div>
           ) : (
-            <h2>You have not set any goals</h2>
+            <h3>You have not set any goals</h3>
           )}
         </section>
       </section>

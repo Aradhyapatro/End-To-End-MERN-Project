@@ -7,8 +7,11 @@ const createGoal = async (goalData, token) => {
       authorization: `Bearer ${token}`,
     },
   };
-
-  const response = await axios.post(API_URL, goalData, config);
+  const data = {
+    text: goalData,
+  };
+  console.log(API_URL, data, config);
+  const response = await axios.post(API_URL, data, config);
 
   if (response.data) {
     console.log("NOt working arya");
@@ -25,13 +28,24 @@ const getGoals = async (token) => {
   };
 
   const response = await axios.get(API_URL, config);
-  console.log("Get done");
+  return response.data;
+};
+
+const deleteGoals = async (id, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(API_URL + ` ${id}`, config);
   return response.data;
 };
 
 const goalService = {
   createGoal,
   getGoals,
+  deleteGoals,
 };
 
 export default goalService;

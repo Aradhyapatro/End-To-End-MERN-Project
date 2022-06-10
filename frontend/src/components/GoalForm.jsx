@@ -9,7 +9,7 @@ const GoalForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createNewGoal());
+    dispatch(createNewGoal(text));
     setText("");
   };
 

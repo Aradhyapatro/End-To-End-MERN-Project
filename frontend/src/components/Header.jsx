@@ -19,10 +19,10 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="logo">
+      <div className="logo m">
         <Link to="/">Goal-Setter</Link>
       </div>
-      <ul>
+      <ul className="m">
         {user ? (
           <li>
             <button className="btn" onClick={Logout}>

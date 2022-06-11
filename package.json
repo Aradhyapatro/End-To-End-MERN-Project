@@ -13,7 +13,10 @@
   "engines": {
     "node": "16.13.0"
   },
-  "repository": "https://github.com/Aradhyapatro/End-To-End-MERN-Project.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aradhyapatro/End-To-End-MERN-Project.git"
+  },
   "author": "Aradhya-Patro <82884623+Aradhyapatro@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
@@ -29,5 +32,9 @@
   "devDependencies": {
     "concurrently": "^7.2.1",
     "nodemon": "^2.0.16"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/Aradhyapatro/End-To-End-MERN-Project/issues"
+  },
+  "homepage": "https://github.com/Aradhyapatro/End-To-End-MERN-Project#readme"
 }

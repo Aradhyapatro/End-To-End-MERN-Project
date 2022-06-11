@@ -10,6 +10,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
+  "engines": {
+    "node": "16.13.0"
+  },
   "repository": "https://github.com/Aradhyapatro/End-To-End-MERN-Project.git",
   "author": "Aradhya-Patro <82884623+Aradhyapatro@users.noreply.github.com>",
   "license": "MIT",

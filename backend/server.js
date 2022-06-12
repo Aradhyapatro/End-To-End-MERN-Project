@@ -28,7 +28,7 @@ if (process.env.node_env === "production") {
 
   app.get("*", (req, res) => {
     res.sendFile(
-      path.resolve(__dirname, "../", "frontend", "build", index.html)
+      path.resolve(__dirname, "../", "frontend", "build", "index.html")
     );
   });
 } else {

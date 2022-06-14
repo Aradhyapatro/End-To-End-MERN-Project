@@ -1,28 +1,18 @@
-import { useDispatch } from "react-redux";
-import { deleteGoal } from "../features/goal/goalSlice";
+import { useDispatch } from 'react-redux'
+import { deleteGoal } from '../features/goals/goalSlice'
 
-const Goalitem = ({ goal }) => {
-  const dispatch = useDispatch();
-  const onClick = (id) => {
-    dispatch(deleteGoal(id));
-  };
+function GoalItem({ goal }) {
+  const dispatch = useDispatch()
 
   return (
-    <div className="goal">
-      <p style={{ fontSize: "15px" }}>
-        {new Date(goal.createdAt).toLocaleString("en-US")}
-      </p>
+    <div className='goal'>
+      <div>{new Date(goal.createdAt).toLocaleString('en-US')}</div>
       <h2>{goal.text}</h2>
-      <button
-        onClick={() => {
-          onClick(goal._id);
-        }}
-        className="close"
-      >
+      <button onClick={() => dispatch(deleteGoal(goal._id))} className='close'>
         X
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Goalitem;
+export default GoalItem

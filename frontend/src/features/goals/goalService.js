@@ -1,24 +1,21 @@
 import axios from "axios";
+
 const API_URL = "http://localhost:5000/api/goals/";
 
+// Create new goal
 const createGoal = async (goalData, token) => {
   const config = {
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
-  const data = {
-    text: goalData,
-  };
-  const response = await axios.post(API_URL, data, config);
 
-  if (response.data) {
-    console.log("NOt working arya");
-  }
+  const response = await axios.post(API_URL, goalData, config);
 
   return response.data;
 };
 
+// Get user goals
 const getGoals = async (token) => {
   const config = {
     headers: {
@@ -27,23 +24,27 @@ const getGoals = async (token) => {
   };
 
   const response = await axios.get(API_URL, config);
+
   return response.data;
 };
 
-const deleteGoals = async (id, token) => {
+// Delete user goal
+const deleteGoal = async (goalId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(API_URL + `${id}`, config);
+
+  const response = await axios.delete(API_URL + goalId, config);
+
   return response.data;
 };
 
 const goalService = {
   createGoal,
   getGoals,
-  deleteGoals,
+  deleteGoal,
 };
 
 export default goalService;

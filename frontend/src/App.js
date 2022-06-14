@@ -1,25 +1,27 @@
-import React from "react";
-import DashBoard from "./Pages/DashBoard";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import Header from './components/Header'
+import Dashboard from './pages/Dashboard'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
   return (
     <>
       <Router>
-        <div className="App">
-          <Header></Header>
+        <div className='container'>
+          <Header />
           <Routes>
-            <Route path="/" element={<DashBoard />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
+            <Route path='/' element={<Dashboard />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

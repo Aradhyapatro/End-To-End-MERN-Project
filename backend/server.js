@@ -6,6 +6,7 @@ const route = require("./routes/goalRoutes");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const { db } = require("./config/db");
 const cors = require("cors");
+
 // constants
 const port = process.env.port || 5000;
 const app = express();
